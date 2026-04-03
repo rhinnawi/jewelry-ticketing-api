@@ -1,8 +1,14 @@
+"""
+Utilities module.
+
+Exports utility enums and helpers for easy importing throughout the application.
+"""
+
 from app.utils.enums import (
-    TicketStatus,
-    TicketPriority,
-    ItemType,
     ItemStatus,
+    ItemType,
+    TicketPriority,
+    TicketStatus,
     UserRole,
 )
 
