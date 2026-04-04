@@ -3,7 +3,7 @@ User API endpoints.
 
 Defines all routes for user-related operations.
 """
-
+import uuid
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 

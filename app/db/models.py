@@ -7,7 +7,8 @@ Defines all database models for the jewelry ticketing system.
 import uuid
 from datetime import datetime
 
-from sqlalchemy import Column, Date, Enum, Float, ForeignKey, Integer, String, Text
+from sqlalchemy import (Column, Date, DateTime, Enum,
+                        Float, ForeignKey, Integer, String, Text, Boolean)
 from sqlalchemy.orm import relationship
 
 from app.db.database import Base
@@ -17,7 +18,7 @@ from app.utils import ItemStatus, ItemType, TicketPriority, TicketStatus, UserRo
 class User(Base):
     """
     User model for system users (sales associates, bench jewelers, admins).
-    
+
     Attributes:
         id: Unique user identifier.
         username: Unique username.
@@ -36,7 +37,7 @@ class User(Base):
     email = Column(String, unique=True, nullable=False, index=True)
     hashed_password = Column(String, nullable=False)
     role = Column(Enum(UserRole), default=UserRole.SALES)
-    created_at = Column(String, default=datetime.utcnow)
+    created_at = Column(DateTime, default=datetime.utcnow)
 
     tickets = relationship("Ticket", back_populates="created_by")
     items = relationship("Item", back_populates="assigned_to")
@@ -45,7 +46,7 @@ class User(Base):
 class Ticket(Base):
     """
     Ticket model for job orders.
-    
+
     Attributes:
         id: Unique ticket identifier.
         ticket_number: Human-readable ticket number.
@@ -73,23 +74,25 @@ class Ticket(Base):
     customer_phone = Column(String)
     customer_email = Column(String)
     created_by_id = Column(String, ForeignKey("users.id"))
-    created_at = Column(String, default=datetime.utcnow)
-    updated_at = Column(String, default=datetime.utcnow, onupdate=datetime.utcnow)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow,
+                        onupdate=datetime.utcnow)
     status = Column(Enum(TicketStatus), default=TicketStatus.DRAFT)
     priority = Column(Enum(TicketPriority), default=TicketPriority.STANDARD)
     deadline = Column(Date)
     notes = Column(Text)
     total_quote = Column(Float)
-    quote_itemized = Column(Integer, default=0)
+    quote_itemized = Column(Boolean, default=False)
 
     created_by = relationship("User", back_populates="tickets")
-    items = relationship("Item", back_populates="ticket", cascade="all, delete-orphan")
+    items = relationship("Item", back_populates="ticket",
+                         cascade="all, delete-orphan")
 
 
 class Item(Base):
     """
     Item model for individual jewelry pieces in a ticket.
-    
+
     Attributes:
         id: Unique item identifier.
         ticket_id: ID of parent ticket.
@@ -116,7 +119,7 @@ class Item(Base):
     status = Column(Enum(ItemStatus), default=ItemStatus.PENDING)
     assigned_to_id = Column(String, ForeignKey("users.id"))
     notes = Column(Text)
-    created_at = Column(String, default=datetime.utcnow)
+    created_at = Column(DateTime, default=datetime.utcnow)
 
     ticket = relationship("Ticket", back_populates="items")
     assigned_to = relationship("User", back_populates="items")
@@ -125,7 +128,7 @@ class Item(Base):
 class PriorityAudit(Base):
     """
     Audit log for priority changes.
-    
+
     Attributes:
         id: Unique audit record identifier.
         ticket_id: ID of the ticket whose priority changed.
@@ -144,4 +147,4 @@ class PriorityAudit(Base):
     new_priority = Column(Enum(TicketPriority))
     changed_by_id = Column(String, ForeignKey("users.id"))
     reason = Column(Text)
-    changed_at = Column(String, default=datetime.utcnow)
+    changed_at = Column(DateTime, default=datetime.utcnow)

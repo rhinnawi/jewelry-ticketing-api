@@ -7,7 +7,6 @@ Handles ticket creation, retrieval, updates, and queue management.
 import uuid
 from datetime import datetime
 
-from sqlalchemy import desc
 from sqlalchemy.orm import Session
 
 from app.db.models import PriorityAudit, Ticket
