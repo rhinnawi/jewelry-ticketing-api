@@ -23,12 +23,12 @@ class TicketService:
     def create_ticket(db: Session, ticket_data: TicketCreate, user_id: str) -> Ticket:
         """
         Create a new ticket with associated items.
-        
+
         Args:
             db: Database session.
             ticket_data: Ticket creation data.
             user_id: ID of user creating the ticket.
-            
+
         Returns:
             Ticket: Created ticket object.
         """
@@ -57,12 +57,12 @@ class TicketService:
     def get_queue(db: Session, skip: int = 0, limit: int = 50) -> list[Ticket]:
         """
         Get queue of pending/in-progress tickets sorted by priority.
-        
+
         Args:
             db: Database session.
             skip: Number of records to skip (pagination).
             limit: Maximum number of records to return.
-            
+
         Returns:
             list[Ticket]: List of tickets sorted by priority score.
         """
@@ -80,7 +80,7 @@ class TicketService:
             tickets_with_scores, key=lambda x: (-x[1], x[0].created_at)
         )
 
-        return [ticket for ticket, _ in tickets_sorted[skip : skip + limit]]
+        return [ticket for ticket, _ in tickets_sorted[skip: skip + limit]]
 
     @staticmethod
     def update_priority(
@@ -88,14 +88,14 @@ class TicketService:
     ) -> Ticket | None:
         """
         Update ticket priority and create audit log.
-        
+
         Args:
             db: Database session.
             ticket_id: ID of ticket to update.
             new_priority: New priority level.
             reason: Reason for the priority change.
             user_id: ID of user making the change.
-            
+
         Returns:
             Ticket | None: Updated ticket or None if not found.
         """
@@ -125,12 +125,12 @@ class TicketService:
     def update_status(db: Session, ticket_id: str, new_status: str) -> Ticket | None:
         """
         Update ticket status.
-        
+
         Args:
             db: Database session.
             ticket_id: ID of ticket to update.
             new_status: New status value.
-            
+
         Returns:
             Ticket | None: Updated ticket or None if not found.
         """

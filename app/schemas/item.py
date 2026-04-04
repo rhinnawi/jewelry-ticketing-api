@@ -15,7 +15,7 @@ from app.utils import ItemStatus, ItemType
 class ItemCreate(BaseModel):
     """
     Schema for creating a new item.
-    
+
     Attributes:
         item_type: Type of jewelry item.
         description: Description of the item and work needed.
@@ -34,7 +34,7 @@ class ItemCreate(BaseModel):
 class ItemResponse(BaseModel):
     """
     Schema for item API responses.
-    
+
     Attributes:
         id: Item identifier.
         ticket_id: Parent ticket identifier.

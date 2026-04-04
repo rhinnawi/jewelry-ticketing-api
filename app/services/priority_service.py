@@ -16,14 +16,14 @@ class PriorityService:
     def calculate_priority_score(ticket) -> int:
         """
         Calculate priority score for a ticket.
-        
+
         Higher scores indicate more urgent tickets. Score is based on:
         - Base priority level (standard=10, rush=50, urgent=85)
         - Days until deadline
-        
+
         Args:
             ticket: Ticket object to score.
-            
+
         Returns:
             int: Priority score (0-100).
         """

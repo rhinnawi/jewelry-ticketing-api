@@ -10,7 +10,7 @@ from pydantic_settings import BaseSettings
 class Settings(BaseSettings):
     """
     Application settings loaded from environment variables.
-    
+
     Attributes:
         DATABASE_URL: PostgreSQL connection string.
         CORS_ORIGINS: List of allowed CORS origins.
@@ -20,7 +20,8 @@ class Settings(BaseSettings):
     """
 
     DATABASE_URL: str = "postgresql://jewelry_user:dev_password@db:5432/jewelry_db"
-    CORS_ORIGINS: list[str] = ["http://localhost:5173", "http://localhost:3000"]
+    CORS_ORIGINS: list[str] = [
+        "http://localhost:5173", "http://localhost:3000"]
     JWT_SECRET: str = "your-secret-key-change-in-production"
     DEBUG: bool = True
     API_V1_STR: str = "/api/v1"

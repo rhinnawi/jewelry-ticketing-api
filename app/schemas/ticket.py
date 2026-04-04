@@ -16,7 +16,7 @@ from app.utils import TicketPriority, TicketStatus
 class TicketCreate(BaseModel):
     """
     Schema for creating a new ticket.
-    
+
     Attributes:
         customer_name: Name of the customer.
         customer_phone: Customer phone number (optional).
@@ -43,9 +43,9 @@ class TicketCreate(BaseModel):
 class TicketUpdate(BaseModel):
     """
     Schema for updating an existing ticket.
-    
+
     All fields are optional - only provided fields will be updated.
-    
+
     Attributes:
         priority: New priority level (optional).
         status: New ticket status (optional).
@@ -62,7 +62,7 @@ class TicketUpdate(BaseModel):
 class TicketResponse(BaseModel):
     """
     Schema for ticket API responses.
-    
+
     Attributes:
         id: Ticket identifier.
         ticket_number: Human-readable ticket number.

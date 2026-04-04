@@ -25,16 +25,16 @@ async def create_ticket(
 ) -> TicketResponse:
     """
     Create a new ticket.
-    
+
     This endpoint is used by sales associates to create new repair tickets.
-    
+
     Args:
         ticket: Ticket data to create.
         db: Database session (injected).
-        
+
     Returns:
         TicketResponse: Created ticket with all details.
-        
+
     Raises:
         HTTPException: If there's an error creating the ticket.
     """
@@ -49,14 +49,14 @@ async def list_tickets(
 ) -> List[TicketResponse]:
     """
     List all tickets.
-    
+
     Retrieve paginated list of all tickets in the system.
-    
+
     Args:
         db: Database session (injected).
         skip: Number of records to skip for pagination.
         limit: Maximum number of records to return.
-        
+
     Returns:
         List[TicketResponse]: List of tickets.
     """
@@ -72,15 +72,15 @@ async def get_bench_queue(
 ) -> List[TicketResponse]:
     """
     Get the bench queue.
-    
+
     Returns tickets sorted by priority for the bench jeweler.
     Higher priority tickets appear first.
-    
+
     Args:
         db: Database session (injected).
         skip: Number of records to skip for pagination.
         limit: Maximum number of records to return.
-        
+
     Returns:
         List[TicketResponse]: Prioritized list of tickets.
     """
@@ -94,14 +94,14 @@ async def get_ticket(
 ) -> TicketResponse:
     """
     Get a specific ticket by ID.
-    
+
     Args:
         ticket_id: ID of the ticket to retrieve.
         db: Database session (injected).
-        
+
     Returns:
         TicketResponse: Ticket details.
-        
+
     Raises:
         HTTPException: 404 if ticket not found.
     """
@@ -119,17 +119,17 @@ async def update_ticket(
 ) -> TicketResponse:
     """
     Update an existing ticket.
-    
+
     Allows partial updates - only provided fields will be updated.
-    
+
     Args:
         ticket_id: ID of the ticket to update.
         ticket_update: Fields to update.
         db: Database session (injected).
-        
+
     Returns:
         TicketResponse: Updated ticket.
-        
+
     Raises:
         HTTPException: 404 if ticket not found.
     """

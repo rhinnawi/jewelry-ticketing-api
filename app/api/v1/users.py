@@ -21,18 +21,19 @@ async def create_user(
 ) -> UserResponse:
     """
     Create a new user.
-    
+
     Args:
         user: User data to create.
         db: Database session (injected).
-        
+
     Returns:
         UserResponse: Created user.
-        
+
     Raises:
         HTTPException: 400 if username already exists.
     """
-    existing_user = db.query(User).filter(User.username == user.username).first()
+    existing_user = db.query(User).filter(
+        User.username == user.username).first()
     if existing_user:
         raise HTTPException(status_code=400, detail="Username already taken")
 
@@ -56,14 +57,14 @@ async def get_user(
 ) -> UserResponse:
     """
     Get a specific user by ID.
-    
+
     Args:
         user_id: ID of the user to retrieve.
         db: Database session (injected).
-        
+
     Returns:
         UserResponse: User details.
-        
+
     Raises:
         HTTPException: 404 if user not found.
     """

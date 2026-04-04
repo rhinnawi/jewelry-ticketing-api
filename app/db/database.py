@@ -31,7 +31,7 @@ Base = declarative_base()
 def get_db():
     """
     Get database session for dependency injection.
-    
+
     Yields:
         Session: SQLAlchemy database session.
     """

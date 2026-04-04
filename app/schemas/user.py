@@ -14,7 +14,7 @@ from app.utils import UserRole
 class UserCreate(BaseModel):
     """
     Schema for creating a new user.
-    
+
     Attributes:
         username: Unique username.
         email: Unique email address.
@@ -31,7 +31,7 @@ class UserCreate(BaseModel):
 class UserResponse(BaseModel):
     """
     Schema for user API responses.
-    
+
     Attributes:
         id: User identifier.
         username: Username.
